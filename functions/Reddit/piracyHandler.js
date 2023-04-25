@@ -3,7 +3,7 @@ const {SubmissionStream } = require("snoostorm");
 module.exports = {
     async execute(client, r){
         const submissions = new SubmissionStream(r, {
-            subreddit: "CrackWatch",
+            subreddit: "testingBot18352",
             limit: 10,
             pollTime: 2000,
         });
@@ -19,9 +19,10 @@ module.exports = {
             }
 
             let post_title = (post).title;
-            console.log("POST: " + post);
-            channel.threads.create({ name: post_title, message: { content: '' }, appliedTags: ['tagID', 'anotherTagID'] });
-            client.channels.cache.get("1046800149516660747").send("<@&956832113515171881> **" + post_title + "**" + "\n" + post.url);
+            console.log(post);
+            const channel = client.channels.cache.get('1098504712241823835');
+            channel.threads.create({ name: post_title, message: { content: post.selftext }});
+            
             oldPostTitle = post.title;
             submission_counter++;
         });   
